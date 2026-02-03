@@ -94,7 +94,7 @@ python scripts/query_huawei.py "IPsec IKE policy 配置" --protocol ipsec --verb
 ## 注意事项
 - Router ID 建议使用设备的 Loopback 接口地址
 - network 命令中的掩码是反掩码格式（0.0.0.255 表示 /24）
-- 确保邻居设备也配置了 OSPF 并在同一区域
+- 确保邻居设备也配置了 OSPF c并在同一区域
 ````
 
 ### 场景 2: NAT 配置
