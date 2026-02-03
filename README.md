@@ -2,6 +2,15 @@
 
 华为网络设备配置 AI 助手 - 基于向量数据库 RAG 系统，从官方文档生成精确的 CLI 配置命令。
 
+[![GitHub](https://img.shields.io/badge/GitHub-huawei--rag--assistant-blue)](https://github.com/ckj313/huawei-rag-assistant)
+
+## 📚 文档导航
+
+- **[README.md](README.md)** - 完整项目文档（本文件）
+- **[CHEATSHEET.md](CHEATSHEET.md)** - 快速参考卡片（命令速查、技巧）⭐
+- **[EXAMPLES.md](EXAMPLES.md)** - 详细使用示例和场景演示
+- **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** - 故障排查指南
+
 ## 功能特性
 
 - 🔍 **智能文档查询**: 基于 ChromaDB 向量数据库，语义搜索 17,000+ 页华为 USG 防火墙官方文档
@@ -183,6 +192,46 @@ display nat session all
 - **ChromaDB**: `~/.local/share/huawei-rag/data/chroma`
 - **文档数量**: 17,000+ chunks (完整摄入后)
 - **磁盘占用**: ~500MB (向量数据库 + 模型)
+
+## ⚠️ 命令验证和修复
+
+**重要**: AI 生成的命令可能存在问题，使用前必须验证！
+
+### 验证清单
+
+执行前检查：
+- ✅ 语法是否正确（华为 CLI 格式）
+- ✅ 参数是否适配你的环境（IP、接口名等）
+- ✅ 命令顺序是否合理
+- ✅ 是否缺少必要步骤
+- ✅ 在测试环境验证后再用于生产
+
+### 质量检查工具
+
+```bash
+# 检查查询结果质量
+cd scripts
+python check_quality.py "OSPF 配置" --protocol ospf
+
+# 输出示例：
+# 查询质量报告
+# 状态: OK
+# 高质量结果: 8 (>= 50%)
+# 最佳分数: 85.23%
+# 建议: ✅ 查询结果质量良好
+```
+
+### 如果命令有问题怎么办？
+
+详见 **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** 完整故障排查指南：
+
+1. **使用详细模式重新查询**: `--verbose --top-k 10`
+2. **调整查询关键词**: 换个说法、更具体
+3. **添加协议过滤器**: `--protocol ospf`
+4. **交叉验证多个结果**: 对比前 5-10 个结果
+5. **查看源文档**: 找到原始 HTML 文件查看上下文
+
+**快速参考**: 查看 [CHEATSHEET.md](CHEATSHEET.md) 获取查询技巧和命令模板。
 
 ## 常见问题
 
