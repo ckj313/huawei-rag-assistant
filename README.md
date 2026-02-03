@@ -23,14 +23,19 @@
 
 ```
 huawei-rag-assistant/
-├── scripts/                    # 核心脚本
-│   ├── html_parser.py         # CHM HTML 文档解析器
-│   ├── ingest.py              # 向量数据库摄入脚本
-│   └── query_huawei.py        # 文档查询 CLI 工具
-├── skills/                     # OpenCode AI Skill
-│   └── huawei-network-config.md
-├── requirements.txt            # Python 依赖
-└── README.md
+├── scripts/                              # 核心脚本
+│   ├── html_parser.py                   # CHM HTML 文档解析器
+│   ├── ingest.py                        # 向量数据库摄入脚本
+│   ├── query_huawei.py                  # 文档查询 CLI 工具
+│   └── check_quality.py                 # 查询质量检查工具
+├── skills/                               # OpenCode AI Skill
+│   └── huawei-network-config/
+│       └── SKILL.md                     # AI Skill 定义文件
+├── requirements.txt                      # Python 依赖
+├── README.md                             # 项目文档
+├── CHEATSHEET.md                         # 快速参考卡片
+├── EXAMPLES.md                           # 使用示例
+└── TROUBLESHOOTING.md                    # 故障排查指南
 ```
 
 ## 快速开始
@@ -110,11 +115,17 @@ python query_huawei.py "BGP 邻居" --json
 
 ## OpenCode AI Skill 集成
 
-将 `skills/huawei-network-config.md` 复制到 OpenCode skills 目录：
+将 skill 目录复制到 OpenCode skills 目录：
 
 ```bash
-cp skills/huawei-network-config.md ~/.config/opencode/skills/huawei-network-config/SKILL.md
+# 完整安装（推荐）
+cp -r skills/huawei-network-config ~/.config/opencode/skills/
+
+# 验证安装
+ls -la ~/.config/opencode/skills/huawei-network-config/SKILL.md
 ```
+
+**重要**: OpenCode 只识别 `SKILL.md` 文件名（全大写），其他文件名无法作为 skill 加载。
 
 然后在 OpenCode 中，AI 会在你询问华为配置问题时自动使用此 skill：
 
